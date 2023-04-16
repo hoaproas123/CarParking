@@ -9,7 +9,7 @@ namespace CarParking.Models
         [Required]
         public DateTime timeIn{ get; set; }
         [Required]
-        public DateTime timeOut { get; set; }
+        public DateTime? timeOut { get; set; }
         [Required]
         public virtual BaiXe BaiXe_Id { get; set; }
         [Required]

@@ -50,6 +50,7 @@ namespace CarParking.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AllSlot = table.Column<int>(type: "int", nullable: false),
+                    RemainingSlot = table.Column<int>(type: "int", nullable: false),
                     NhanVienQL_IDId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
@@ -70,7 +71,7 @@ namespace CarParking.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     timeIn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    timeOut = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    timeOut = table.Column<DateTime>(type: "datetime2", nullable: true),
                     BaiXe_IdId = table.Column<int>(type: "int", nullable: false),
                     Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },

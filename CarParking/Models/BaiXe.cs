@@ -9,6 +9,8 @@ namespace CarParking.Models
         [Required] 
         public int AllSlot { get; set; }
         [Required]
+        public int RemainingSlot { get; set; }
+        [Required]
         public virtual NhanVien NhanVienQL_ID { get; set; }
         [Required]
         public decimal Price { get; set; }

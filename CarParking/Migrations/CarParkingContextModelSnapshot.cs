@@ -58,6 +58,9 @@ namespace CarParking.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("RemainingSlot")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NhanVienQL_IDId");
@@ -79,7 +82,8 @@ namespace CarParking.Migrations
                     b.Property<DateTime>("timeIn")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("timeOut")
+                    b.Property<DateTime?>("timeOut")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
