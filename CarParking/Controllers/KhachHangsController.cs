@@ -27,7 +27,7 @@ namespace CarParking.Controllers
         }
 
         // GET: KhachHangs/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.KhachHang == null)
             {
@@ -48,7 +48,7 @@ namespace CarParking.Controllers
         // GET: KhachHangs/Create
         public IActionResult Create()
         {
-            ViewData["BaiXe_Id"] = new SelectList(_context.BaiXe, "Id", "NhanVien_Id");
+            ViewData["BaiXe_Id"] = new SelectList(_context.BaiXe, "Id", "Id");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace CarParking.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,timeIn,timeOut,BaiXe_Id,Total")] KhachHang khachHang)
+        public async Task<IActionResult> Create([Bind("Id,MaXe,timeIn,timeOut,BaiXe_Id,Total")] KhachHang khachHang)
         {
             //if (ModelState.IsValid)
             //{
@@ -70,7 +70,7 @@ namespace CarParking.Controllers
         }
 
         // GET: KhachHangs/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.KhachHang == null)
             {
@@ -82,7 +82,7 @@ namespace CarParking.Controllers
             {
                 return NotFound();
             }
-            ViewData["BaiXe_Id"] = new SelectList(_context.BaiXe, "Id", "NhanVien_Id", khachHang.BaiXe_Id);
+            ViewData["BaiXe_Id"] = new SelectList(_context.BaiXe, "Id", "ID", khachHang.BaiXe_Id);
             return View(khachHang);
         }
 
@@ -91,7 +91,7 @@ namespace CarParking.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,timeIn,timeOut,BaiXe_Id,Total")] KhachHang khachHang)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,MaXe,timeIn,timeOut,BaiXe_Id,Total")] KhachHang khachHang)
         {
             if (id != khachHang.Id)
             {
@@ -118,12 +118,12 @@ namespace CarParking.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BaiXe_Id"] = new SelectList(_context.BaiXe, "Id", "NhanVien_Id", khachHang.BaiXe_Id);
+            ViewData["BaiXe_Id"] = new SelectList(_context.BaiXe, "Id", "Id", khachHang.BaiXe_Id);
             return View(khachHang);
         }
 
         // GET: KhachHangs/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.KhachHang == null)
             {
@@ -144,7 +144,7 @@ namespace CarParking.Controllers
         // POST: KhachHangs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.KhachHang == null)
             {
@@ -160,7 +160,7 @@ namespace CarParking.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool KhachHangExists(string id)
+        private bool KhachHangExists(int id)
         {
           return (_context.KhachHang?.Any(e => e.Id == id)).GetValueOrDefault();
         }

@@ -16,6 +16,6 @@ namespace CarParking.Models
         [ForeignKey("NhanVien_Id")]
         public virtual NhanVien NhanVien { get; set; }
         [Required]
-        public decimal Price { get; set; }
+        public int Price { get; set; }
     }
 }

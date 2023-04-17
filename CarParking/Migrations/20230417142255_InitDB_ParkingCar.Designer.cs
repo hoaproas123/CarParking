@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarParking.Migrations
 {
     [DbContext(typeof(CarParkingContext))]
-    [Migration("20230417063343_InitDB")]
-    partial class InitDB
+    [Migration("20230417142255_InitDB_ParkingCar")]
+    partial class InitDB_ParkingCar
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -57,8 +57,8 @@ namespace CarParking.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
 
                     b.Property<int>("RemainingSlot")
                         .HasColumnType("int");
@@ -72,14 +72,21 @@ namespace CarParking.Migrations
 
             modelBuilder.Entity("CarParking.Models.KhachHang", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("BaiXe_Id")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Total")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("MaXe")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Total")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("timeIn")
                         .HasColumnType("datetime2");

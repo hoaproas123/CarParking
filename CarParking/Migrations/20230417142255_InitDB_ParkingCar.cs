@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CarParking.Migrations
 {
-    public partial class InitDB : Migration
+    public partial class InitDB_ParkingCar : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -51,7 +51,7 @@ namespace CarParking.Migrations
                     AllSlot = table.Column<int>(type: "int", nullable: false),
                     RemainingSlot = table.Column<int>(type: "int", nullable: false),
                     NhanVien_Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Price = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -68,11 +68,13 @@ namespace CarParking.Migrations
                 name: "KhachHang",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MaXe = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     timeIn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     timeOut = table.Column<DateTime>(type: "datetime2", nullable: true),
                     BaiXe_Id = table.Column<int>(type: "int", nullable: false),
-                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Total = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

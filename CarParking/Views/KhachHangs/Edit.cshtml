@@ -14,6 +14,11 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
+                <label asp-for="MaXe" class="control-label"></label>
+                <input asp-for="MaXe" class="form-control" />
+                <span asp-validation-for="MaXe" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="timeIn" class="control-label"></label>
                 <input asp-for="timeIn" class="form-control" />
                 <span asp-validation-for="timeIn" class="text-danger"></span>

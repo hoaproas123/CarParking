@@ -1,8 +1,21 @@
-﻿@{
+﻿@model CarParking.Models.KhachHang
+@{
     ViewData["Title"] = "Home Page";
 }
+<form asp-action="Index">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="MaXe" class="control-label"></label>
+        <input asp-for="MaXe" class="form-control" />
+        <span asp-validation-for="MaXe" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="BaiXe_Id" class="control-label"></label>
+        <select asp-for="BaiXe_Id" class="form-control" asp-items="ViewBag.BaiXe_Id"></select>
+    </div>
+    <div class="form-group">
+        <input asp-action="CheckIn" type="submit" value="Check In" class="btn btn-primary" />
+        <input asp-action="CheckOut" type="submit" value="Check Out" class="btn btn-primary" />
+    </div>
+</form>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<CarParking.Models.KhachHang>
+
+@{
+    ViewData["Title"] = "Checked In";
+}
+
+<h1>Checked In</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaXe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.timeIn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.timeOut)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BaiXe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaXe)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.timeIn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.timeOut)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BaiXe_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
