@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CarParking.Models
 {
@@ -8,10 +9,11 @@ namespace CarParking.Models
         public string Id { get; set; }
         [Required]
         public DateTime timeIn{ get; set; }
-        [Required]
         public DateTime? timeOut { get; set; }
         [Required]
-        public virtual BaiXe BaiXe_Id { get; set; }
+        public int BaiXe_Id { get; set; }
+        [ForeignKey("BaiXe_Id")]
+        public virtual BaiXe BaiXe { get; set; }
         [Required]
         public decimal Total { get; set; }
 

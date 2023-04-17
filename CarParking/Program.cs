@@ -4,7 +4,6 @@ using CarParking.Data;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<CarParkingContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("CarParkingContext") ?? throw new InvalidOperationException("Connection string 'CarParkingContext' not found.")));
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

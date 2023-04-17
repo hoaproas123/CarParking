@@ -27,7 +27,7 @@ namespace CarParking.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UserNameId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     HoTen = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SDT = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     dChi = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -36,11 +36,10 @@ namespace CarParking.Migrations
                 {
                     table.PrimaryKey("PK_NhanVien", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_NhanVien_Account_UserNameId",
-                        column: x => x.UserNameId,
+                        name: "FK_NhanVien_Account_UserName",
+                        column: x => x.UserName,
                         principalTable: "Account",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -51,15 +50,15 @@ namespace CarParking.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AllSlot = table.Column<int>(type: "int", nullable: false),
                     RemainingSlot = table.Column<int>(type: "int", nullable: false),
-                    NhanVienQL_IDId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    NhanVien_Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BaiXe", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BaiXe_NhanVien_NhanVienQL_IDId",
-                        column: x => x.NhanVienQL_IDId,
+                        name: "FK_BaiXe_NhanVien_NhanVien_Id",
+                        column: x => x.NhanVien_Id,
                         principalTable: "NhanVien",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -72,34 +71,34 @@ namespace CarParking.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     timeIn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     timeOut = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    BaiXe_IdId = table.Column<int>(type: "int", nullable: false),
+                    BaiXe_Id = table.Column<int>(type: "int", nullable: false),
                     Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_KhachHang", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_KhachHang_BaiXe_BaiXe_IdId",
-                        column: x => x.BaiXe_IdId,
+                        name: "FK_KhachHang_BaiXe_BaiXe_Id",
+                        column: x => x.BaiXe_Id,
                         principalTable: "BaiXe",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BaiXe_NhanVienQL_IDId",
+                name: "IX_BaiXe_NhanVien_Id",
                 table: "BaiXe",
-                column: "NhanVienQL_IDId");
+                column: "NhanVien_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_KhachHang_BaiXe_IdId",
+                name: "IX_KhachHang_BaiXe_Id",
                 table: "KhachHang",
-                column: "BaiXe_IdId");
+                column: "BaiXe_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_NhanVien_UserNameId",
+                name: "IX_NhanVien_UserName",
                 table: "NhanVien",
-                column: "UserNameId");
+                column: "UserName");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

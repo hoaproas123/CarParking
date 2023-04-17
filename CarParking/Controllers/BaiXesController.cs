@@ -22,9 +22,8 @@ namespace CarParking.Controllers
         // GET: BaiXes
         public async Task<IActionResult> Index()
         {
-              return _context.BaiXe != null ? 
-                          View(await _context.BaiXe.ToListAsync()) :
-                          Problem("Entity set 'CarParkingContext.BaiXe'  is null.");
+            var carParkingContext = _context.BaiXe.Include(b => b.NhanVien);
+            return View(await carParkingContext.ToListAsync());
         }
 
         // GET: BaiXes/Details/5
@@ -36,6 +35,7 @@ namespace CarParking.Controllers
             }
 
             var baiXe = await _context.BaiXe
+                .Include(b => b.NhanVien)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (baiXe == null)
             {
@@ -48,6 +48,7 @@ namespace CarParking.Controllers
         // GET: BaiXes/Create
         public IActionResult Create()
         {
+            ViewData["NhanVien_Id"] = new SelectList(_context.Set<NhanVien>(), "Id", "Id");
             return View();
         }
 
@@ -56,15 +57,16 @@ namespace CarParking.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,AllSlot,Price")] BaiXe baiXe)
+        public async Task<IActionResult> Create([Bind("Id,AllSlot,RemainingSlot,NhanVien_Id,Price")] BaiXe baiXe)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 _context.Add(baiXe);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            return View(baiXe);
+            //}
+            //ViewData["NhanVien_Id"] = new SelectList(_context.Set<NhanVien>(), "Id", "Id", baiXe.NhanVien_Id);
+            //return View(baiXe);
         }
 
         // GET: BaiXes/Edit/5
@@ -80,6 +82,7 @@ namespace CarParking.Controllers
             {
                 return NotFound();
             }
+            ViewData["NhanVien_Id"] = new SelectList(_context.Set<NhanVien>(), "Id", "Id", baiXe.NhanVien_Id);
             return View(baiXe);
         }
 
@@ -88,7 +91,7 @@ namespace CarParking.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,AllSlot,Price")] BaiXe baiXe)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,AllSlot,RemainingSlot,NhanVien_Id,Price")] BaiXe baiXe)
         {
             if (id != baiXe.Id)
             {
@@ -115,6 +118,7 @@ namespace CarParking.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["NhanVien_Id"] = new SelectList(_context.Set<NhanVien>(), "Id", "Id", baiXe.NhanVien_Id);
             return View(baiXe);
         }
 
@@ -127,6 +131,7 @@ namespace CarParking.Controllers
             }
 
             var baiXe = await _context.BaiXe
+                .Include(b => b.NhanVien)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (baiXe == null)
             {

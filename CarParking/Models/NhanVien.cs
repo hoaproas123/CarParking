@@ -1,5 +1,6 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Principal;
 
 namespace CarParking.Models
@@ -8,8 +9,9 @@ namespace CarParking.Models
     {
         [Key]
         public string Id { get; set; }
-        [Required]
-        public virtual Account UserName { get; set; }
+        public string? UserName { get; set; }
+        [ForeignKey("UserName")]
+        public virtual Account Account { get; set; }
         [Required]
         public string HoTen { get; set; }
         [Required]

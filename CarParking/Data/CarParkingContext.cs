@@ -16,10 +16,11 @@ namespace CarParking.Data
 
         public DbSet<CarParking.Models.Account> Account { get; set; } = default!;
 
-        public DbSet<CarParking.Models.NhanVien>? NhanVien { get; set; }
-
         public DbSet<CarParking.Models.BaiXe>? BaiXe { get; set; }
 
         public DbSet<CarParking.Models.KhachHang>? KhachHang { get; set; }
+
+        public DbSet<CarParking.Models.NhanVien>? NhanVien { get; set; }
+
     }
 }

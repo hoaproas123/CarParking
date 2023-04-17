@@ -16,6 +16,12 @@
                 @Html.DisplayNameFor(model => model.AllSlot)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.RemainingSlot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NhanVien)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
             <th></th>
@@ -26,6 +32,12 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.AllSlot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RemainingSlot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NhanVien.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)

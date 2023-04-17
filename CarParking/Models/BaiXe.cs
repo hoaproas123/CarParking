@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CarParking.Models
 {
@@ -11,7 +12,9 @@ namespace CarParking.Models
         [Required]
         public int RemainingSlot { get; set; }
         [Required]
-        public virtual NhanVien NhanVienQL_ID { get; set; }
+        public string NhanVien_Id { get; set; } 
+        [ForeignKey("NhanVien_Id")]
+        public virtual NhanVien NhanVien { get; set; }
         [Required]
         public decimal Price { get; set; }
     }

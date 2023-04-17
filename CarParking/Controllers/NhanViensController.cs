@@ -22,9 +22,8 @@ namespace CarParking.Controllers
         // GET: NhanViens
         public async Task<IActionResult> Index()
         {
-              return _context.NhanVien != null ? 
-                          View(await _context.NhanVien.ToListAsync()) :
-                          Problem("Entity set 'CarParkingContext.NhanVien'  is null.");
+            var carParkingContext = _context.NhanVien.Include(n => n.Account);
+            return View(await carParkingContext.ToListAsync());
         }
 
         // GET: NhanViens/Details/5
@@ -36,6 +35,7 @@ namespace CarParking.Controllers
             }
 
             var nhanVien = await _context.NhanVien
+                .Include(n => n.Account)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (nhanVien == null)
             {
@@ -48,6 +48,7 @@ namespace CarParking.Controllers
         // GET: NhanViens/Create
         public IActionResult Create()
         {
+            ViewData["UserName"] = new SelectList(_context.Account, "Id", "Id");
             return View();
         }
 
@@ -56,15 +57,16 @@ namespace CarParking.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,HoTen,SDT,dChi")] NhanVien nhanVien)
+        public async Task<IActionResult> Create([Bind("Id,UserName,HoTen,SDT,dChi")] NhanVien nhanVien)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 _context.Add(nhanVien);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            return View(nhanVien);
+            //}
+            //ViewData["UserName"] = new SelectList(_context.Account, "Id", "Id", nhanVien.UserName);
+            //return View(nhanVien);
         }
 
         // GET: NhanViens/Edit/5
@@ -80,6 +82,7 @@ namespace CarParking.Controllers
             {
                 return NotFound();
             }
+            ViewData["UserName"] = new SelectList(_context.Account, "Id", "Id", nhanVien.UserName);
             return View(nhanVien);
         }
 
@@ -88,7 +91,7 @@ namespace CarParking.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,HoTen,SDT,dChi")] NhanVien nhanVien)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,UserName,HoTen,SDT,dChi")] NhanVien nhanVien)
         {
             if (id != nhanVien.Id)
             {
@@ -115,6 +118,7 @@ namespace CarParking.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["UserName"] = new SelectList(_context.Account, "Id", "Id", nhanVien.UserName);
             return View(nhanVien);
         }
 
@@ -127,6 +131,7 @@ namespace CarParking.Controllers
             }
 
             var nhanVien = await _context.NhanVien
+                .Include(n => n.Account)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (nhanVien == null)
             {

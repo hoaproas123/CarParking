@@ -19,6 +19,16 @@
                 <span asp-validation-for="AllSlot" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="RemainingSlot" class="control-label"></label>
+                <input asp-for="RemainingSlot" class="form-control" />
+                <span asp-validation-for="RemainingSlot" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NhanVien_Id" class="control-label"></label>
+                <select asp-for="NhanVien_Id" class="form-control" asp-items="ViewBag.NhanVien_Id"></select>
+                <span asp-validation-for="NhanVien_Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
                 <input asp-for="Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>

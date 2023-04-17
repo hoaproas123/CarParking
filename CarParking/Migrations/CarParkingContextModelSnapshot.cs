@@ -51,7 +51,7 @@ namespace CarParking.Migrations
                     b.Property<int>("AllSlot")
                         .HasColumnType("int");
 
-                    b.Property<string>("NhanVienQL_IDId")
+                    b.Property<string>("NhanVien_Id")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
@@ -63,7 +63,7 @@ namespace CarParking.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NhanVienQL_IDId");
+                    b.HasIndex("NhanVien_Id");
 
                     b.ToTable("BaiXe");
                 });
@@ -73,7 +73,7 @@ namespace CarParking.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("BaiXe_IdId")
+                    b.Property<int>("BaiXe_Id")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Total")
@@ -83,12 +83,11 @@ namespace CarParking.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("timeOut")
-                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BaiXe_IdId");
+                    b.HasIndex("BaiXe_Id");
 
                     b.ToTable("KhachHang");
                 });
@@ -106,8 +105,7 @@ namespace CarParking.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserNameId")
-                        .IsRequired()
+                    b.Property<string>("UserName")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("dChi")
@@ -116,42 +114,40 @@ namespace CarParking.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserNameId");
+                    b.HasIndex("UserName");
 
                     b.ToTable("NhanVien");
                 });
 
             modelBuilder.Entity("CarParking.Models.BaiXe", b =>
                 {
-                    b.HasOne("CarParking.Models.NhanVien", "NhanVienQL_ID")
+                    b.HasOne("CarParking.Models.NhanVien", "NhanVien")
                         .WithMany()
-                        .HasForeignKey("NhanVienQL_IDId")
+                        .HasForeignKey("NhanVien_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("NhanVienQL_ID");
+                    b.Navigation("NhanVien");
                 });
 
             modelBuilder.Entity("CarParking.Models.KhachHang", b =>
                 {
-                    b.HasOne("CarParking.Models.BaiXe", "BaiXe_Id")
+                    b.HasOne("CarParking.Models.BaiXe", "BaiXe")
                         .WithMany()
-                        .HasForeignKey("BaiXe_IdId")
+                        .HasForeignKey("BaiXe_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("BaiXe_Id");
+                    b.Navigation("BaiXe");
                 });
 
             modelBuilder.Entity("CarParking.Models.NhanVien", b =>
                 {
-                    b.HasOne("CarParking.Models.Account", "UserName")
+                    b.HasOne("CarParking.Models.Account", "Account")
                         .WithMany()
-                        .HasForeignKey("UserNameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserName");
 
-                    b.Navigation("UserName");
+                    b.Navigation("Account");
                 });
 #pragma warning restore 612, 618
         }
