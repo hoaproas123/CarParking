@@ -27,14 +27,19 @@ namespace CarParking.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CheckIn([Bind("Id,MaXe,timeIn,timeOut,BaiXe_Id,Total")] KhachHang khachHang)
         {
+            int count_KH = _context.KhachHang.Where(x=>x.MaXe==khachHang.MaXe && x.timeOut==null).Count();
             BaiXe BaiXe = _context.BaiXe.Where(x => x.Id == khachHang.BaiXe_Id).FirstOrDefault();
-            khachHang.timeIn = DateTime.Now;
-            khachHang.timeOut = null;
-            khachHang.Total = BaiXe.Price;
-            BaiXe.RemainingSlot--;
-            _context.Add(khachHang);
-            _context.Update(BaiXe);
-            await _context.SaveChangesAsync();
+            if (count_KH==0)
+            {
+                khachHang.timeIn = DateTime.Now;
+                khachHang.timeOut = null;
+                khachHang.Total = BaiXe.Price;
+                BaiXe.RemainingSlot--;
+                _context.Add(khachHang);
+                _context.Update(BaiXe);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
             return RedirectToAction(nameof(Index));
         }
         [HttpPost]
@@ -63,8 +68,8 @@ namespace CarParking.Controllers
         }
         public int TinhTien(DateTime a,DateTime? b)
         {
-            int TotalTime = (b.Value.Month-a.Month)*43200+(b.Value.Day-a.Day)*1440+(b.Value.Hour-a.Hour)*60+(b.Value.Minute-a.Minute);
-            return TotalTime/60*20000;
+            double  TotalTime = (b.Value.Year-a.Year)*5255948.8+(b.Value.Month-a.Month)*43200+(b.Value.Day-a.Day)*1440+(b.Value.Hour-a.Hour)*60+(b.Value.Minute-a.Minute);
+            return (int)TotalTime/60*20000;
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
