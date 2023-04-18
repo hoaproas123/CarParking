@@ -49,7 +49,7 @@ namespace CarParking.Controllers
             KhachHang khachHang = _context.KhachHang.Where(x => x.MaXe == MaXe && x.timeOut==null).FirstOrDefault();
             BaiXe BaiXe = _context.BaiXe.Where(x => x.Id == khachHang.BaiXe_Id).FirstOrDefault();
             khachHang.timeOut = DateTime.Now;
-            khachHang.Total = BaiXe.Price +TinhTien(khachHang.timeIn,khachHang.timeOut);
+            khachHang.Total = BaiXe.Price +TinhTien(khachHang.timeIn,khachHang.timeOut,BaiXe.Price);
             BaiXe.RemainingSlot++;
             _context.Update(khachHang);
             _context.Update(BaiXe);
@@ -66,10 +66,10 @@ namespace CarParking.Controllers
             var carParkingContext = _context.KhachHang.Include(k => k.BaiXe).Where(k=>k.timeOut!=null);
             return View(await carParkingContext.ToListAsync());
         }
-        public int TinhTien(DateTime a,DateTime? b)
+        public int TinhTien(DateTime a,DateTime? b,int Gia)
         {
-            double  TotalTime = (b.Value.Year-a.Year)*5255948.8+(b.Value.Month-a.Month)*43200+(b.Value.Day-a.Day)*1440+(b.Value.Hour-a.Hour)*60+(b.Value.Minute-a.Minute);
-            return (int)TotalTime/60*20000;
+            TimeSpan TotalTime = b.Value-a;
+            return (int)TotalTime.TotalHours*Gia;
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
