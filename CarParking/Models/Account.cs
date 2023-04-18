@@ -5,10 +5,13 @@ namespace CarParking.Models
     public class Account
     {
         [Key]
-        public string Id { get; set; }
+		[Display(Name = "Tài Khoản")]
+		public string Id { get; set; }
         [Required]
-        public string Password { get; set; }
+		[Display(Name = "Mật Khẩu")]
+		public string Password { get; set; }
         [Required]
-        public string Role { get; set; }
+		[Display(Name = "Quyền Hạn")]
+		public string Role { get; set; }
     }
 }

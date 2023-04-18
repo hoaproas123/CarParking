@@ -9,14 +9,18 @@ namespace CarParking.Models
     {
         [Key]
         public string Id { get; set; }
-        public string? UserName { get; set; }
+		[Display(Name = "Tên Đăng Nhập")]
+		public string? UserName { get; set; }
         [ForeignKey("UserName")]
         public virtual Account Account { get; set; }
         [Required]
-        public string HoTen { get; set; }
+		[Display(Name = "Họ Tên")]
+		public string HoTen { get; set; }
         [Required]
-        public string SDT { get; set; }
+		[Display(Name = "Số Điện Thoại")]
+		public string SDT { get; set; }
         [Required]
-        public string dChi { get; set; }        
+		[Display(Name = "Địa Chỉ")]
+		public string dChi { get; set; }        
     }
 }

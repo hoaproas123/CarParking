@@ -11,8 +11,10 @@ namespace CarParking.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly CarParkingContext _context;
+		[TempData]
+		public string StatusMessage { get; set; }
 
-        public HomeController(ILogger<HomeController> logger, CarParkingContext context)
+		public HomeController(ILogger<HomeController> logger, CarParkingContext context)
         {
             _logger = logger;
             _context = context;
@@ -20,8 +22,12 @@ namespace CarParking.Controllers
 
         public IActionResult Index()
         {
-            ViewData["BaiXe_Id"] = new SelectList(_context.BaiXe, "Id", "Id");
             return View();
+        }
+        public IActionResult HomePage()
+        {
+			ViewData["BaiXe_Id"] = new SelectList(_context.BaiXe, "Id", "Id");
+			return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -38,32 +44,40 @@ namespace CarParking.Controllers
                 _context.Add(khachHang);
                 _context.Update(BaiXe);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return RedirectToAction(nameof(Index));
-        }
-        [HttpPost]
+                StatusMessage = $"Thêm Thành Công Xe: {khachHang.MaXe}";
+                return RedirectToAction("HomePage");
+			}
+            StatusMessage = "Lỗi: Thông tin không hợp lệ hoặc đã tồn tại";
+			return RedirectToAction("HomePage");
+		}
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CheckOut(string? MaXe)
         {
             KhachHang khachHang = _context.KhachHang.Where(x => x.MaXe == MaXe && x.timeOut==null).FirstOrDefault();
-            BaiXe BaiXe = _context.BaiXe.Where(x => x.Id == khachHang.BaiXe_Id).FirstOrDefault();
-            khachHang.timeOut = DateTime.Now;
-            khachHang.Total = BaiXe.Price +TinhTien(khachHang.timeIn,khachHang.timeOut,BaiXe.Price);
-            BaiXe.RemainingSlot++;
-            _context.Update(khachHang);
-            _context.Update(BaiXe);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if(khachHang!=null)
+            {
+				BaiXe BaiXe = _context.BaiXe.Where(x => x.Id == khachHang.BaiXe_Id).FirstOrDefault();
+				khachHang.timeOut = DateTime.Now;
+				khachHang.Total = BaiXe.Price + TinhTien(khachHang.timeIn, khachHang.timeOut, BaiXe.Price);
+				BaiXe.RemainingSlot++;
+				_context.Update(khachHang);
+				_context.Update(BaiXe);
+				await _context.SaveChangesAsync();
+				StatusMessage = $"Tổng Tiền: {khachHang.Total}";
+				return RedirectToAction("HomePage");
+			}
+			StatusMessage = "Lỗi: Biển Số Xe không tồn tại trong bãi";
+			return RedirectToAction("HomePage");
         }
         public async Task<IActionResult> CheckedIn()
         {
-            var carParkingContext = _context.KhachHang.Include(k => k.BaiXe).Where(k=>k.timeOut==null);
+            var carParkingContext = _context.KhachHang.Include(k => k.BaiXe).Where(k=>k.timeOut==null).OrderByDescending(k=>k.timeIn);
             return View(await carParkingContext.ToListAsync());
         }
         public async Task<IActionResult> CheckedOut()
         {
-            var carParkingContext = _context.KhachHang.Include(k => k.BaiXe).Where(k=>k.timeOut!=null);
+            var carParkingContext = _context.KhachHang.Include(k => k.BaiXe).Where(k=>k.timeOut!=null).OrderByDescending(k=>k.timeOut);
             return View(await carParkingContext.ToListAsync());
         }
         public int TinhTien(DateTime a,DateTime? b,int Gia)

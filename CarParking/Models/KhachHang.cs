@@ -5,19 +5,24 @@ namespace CarParking.Models
 {
     public class KhachHang
     {
-        [Key] 
+        [Key]
         public int Id { get; set; }
         [Required]
-        public string MaXe { get; set; }
+		[Display(Name = "Biển Số Xe")]
+		public string MaXe { get; set; }
         [Required]
-        public DateTime timeIn{ get; set; }
-        public DateTime? timeOut { get; set; }
+		[Display(Name = "Giờ Vào")]
+		public DateTime timeIn{ get; set; }
+		[Display(Name = "Giờ Ra")]
+		public DateTime? timeOut { get; set; }
         [Required]
-        public int BaiXe_Id { get; set; }
+		[Display(Name = "Mã Bãi Xe")]
+		public int BaiXe_Id { get; set; }
         [ForeignKey("BaiXe_Id")]
         public virtual BaiXe BaiXe { get; set; }
         [Required]
-        public int Total { get; set; }
+		[Display(Name = "Tổng Tiền")]
+		public int Total { get; set; }
 
     }
 }
