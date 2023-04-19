@@ -1,0 +1,84 @@
+﻿
+.table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.custom-title {
+	font-size: 50px; 
+	color: #ff0000; 
+	text-align: center; 
+	text-transform: uppercase; 
+	margin-top: 50px; 
+
+}
+
+.table thead th {
+	padding: 10px;
+	text-align: left;
+	background-color: #228B22; 
+	color: #fff;
+	font-weight: bold;
+	border-bottom: none;
+	
+	font-size: 18px;
+	font-weight: bold;
+	color: #333;
+	background-color: #228B22; 
+	color: #fff;
+}
+
+
+	.table thead th:hover {
+		background-color: #228B22; 
+		color: #fff;
+	}
+
+
+.table tbody td {
+	padding: 16px;
+	border-bottom: 1px solid #dee2e6;
+}
+
+
+.table tbody tr:nth-child(even) {
+	background-color: #f8f9fa;
+}
+
+
+.table tbody tr:nth-child(odd) {
+	background-color: #fff;
+}
+
+
+.table tbody tr:hover {
+	background-color: #e9ecef;
+}
+
+
+.table tbody td {
+	vertical-align: middle;
+}
+
+
+.table thead th {
+	vertical-align: middle;
+}
+
+
+.form-group input[type="submit"] {
+	margin-top: 12px;
+	margin-right: 5px;
+}
+
+.table thead th:not(:last-child)::after,
+.table tbody td:not(:last-child)::after {
+	content: "";
+	display: block;
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 100%;
+	width: 1px;
+	background-color: #dee2e6;
+}
