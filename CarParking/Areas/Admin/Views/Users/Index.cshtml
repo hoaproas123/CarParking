@@ -1,0 +1,51 @@
+﻿@model IEnumerable<AppUser>
+
+@{
+    ViewData["Title"] = "Danh sách nhân viên";
+    @inject RoleManager<IdentityRole> _roleManager
+
+}
+<h1>Danh sách tài khoản</h1>
+
+<div class="mb-2">
+    <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Register">Tạo tài khoản</a>
+
+</div>
+<partial name="_StatusMessage" model=@TempData["StatusMessage"]></partial>
+<table class="table">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+                <th>
+                    Vai trò
+                </th>
+                <th>
+                    Tác vụ
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @item.RoleNames
+                    </td>
+                    <td>
+
+                        <a class="btn btn-success btn-sm" asp-area="Admin" asp-controller="Users" asp-action="Edit" asp-route-userid="@item.Id">Sửa</a>
+                        <a class="btn btn-danger btn-sm" asp-area="Admin" asp-controller="Users" asp-action="Delete" asp-route-userid="@item.Id">Xóa</a>
+                        <a class="btn btn-danger btn-sm" asp-area="Admin" asp-controller="Users" asp-action="AssignRole" asp-route-userid="@item.Id">Gán role</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</table>

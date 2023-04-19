@@ -1,8 +1,9 @@
-﻿<partial name="_StatusMessage" model=@TempData["StatusMessage"]></partial>
+﻿
 @model CarParking.Models.KhachHang
 @{
 	ViewData["Title"] = "Home Page";
 }
+<partial name="_StatusMessage" model=@TempData["StatusMessage"]></partial>
 <form asp-action="HomePage">
 	<div class="white-bg">
 		<link rel="stylesheet" type="text/css" href="~/css/Home.css">

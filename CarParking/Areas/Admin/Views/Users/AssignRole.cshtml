@@ -1,0 +1,45 @@
+﻿@model CarParking.Areas.Admin.Controllers.UsersController.InputModel
+@inject RoleManager<IdentityRole> _roleManager
+@inject UserManager<AppUser> _userManager
+
+@{
+    ViewData["Title"] = "Role của user";
+}
+@{
+    //var roles = await _userManager.GetRolesAsync(Model);
+    //var allroles = await _roleManager.Roles.ToListAsync();
+
+    //List<string> roleName = new List<string>()
+    //{
+    //     "role1","role2","role3","role4"
+    //};
+    //var allrole = new SelectList(roleName);
+}
+<h2>Các role của @Model.Name</h2>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-action="AssignRole">
+            <partial name="_StatusMessage" model=@TempData["StatusMessage"] />
+            @*<div class="form-group">
+            @Html.LabelFor(x => x.RoleNames)
+            @Html.ListBoxFor(x => x.RoleNames,
+            new SelectList( Model.ListRole),
+            new {@class="w-100", id = "selectrole"})
+            </div>*@
+            <select name="selectedItems" class="w-100" multiple>
+                @foreach (var item in Model.ListRole)
+                {
+                    <option value="@item">@item</option>
+                }
+            </select>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" asp-for="@Model.ID">
+            @*<input type="hidden" asp-for="isConfirmed">*@
+            <div class="form-group">
+                <input type="submit" value="Cập nhật" class="btn btn-danger" />
+                <a class="btn btn-primary" asp-action="index">Danh sách</a>
+            </div>
+        </form>
+    </div>
+</div>
+

@@ -12,9 +12,9 @@ namespace CarParking.Controllers
 {
     public class AccountsController : Controller
     {
-        private readonly CarParkingContext _context;
+        private readonly DataContext _context;
 
-        public AccountsController(CarParkingContext context)
+        public AccountsController(DataContext context)
         {
             _context = context;
         }
@@ -24,7 +24,7 @@ namespace CarParking.Controllers
         {
               return _context.Account != null ? 
                           View(await _context.Account.ToListAsync()) :
-                          Problem("Entity set 'CarParkingContext.Account'  is null.");
+                          Problem("Entity set 'DataContext.Account'  is null.");
         }
 
         // GET: Accounts/Details/5
@@ -143,7 +143,7 @@ namespace CarParking.Controllers
         {
             if (_context.Account == null)
             {
-                return Problem("Entity set 'CarParkingContext.Account'  is null.");
+                return Problem("Entity set 'DataContext.Account'  is null.");
             }
             var account = await _context.Account.FindAsync(id);
             if (account != null)

@@ -1,0 +1,11 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model IdentityRole
+
+<h1>Xoa role</h1>
+<h2>Bạn có chắc là muốn xóa role @Model.Name không?</h2>
+
+<form asp-action="DeleteRole" class="mt-2">
+    <input type="hidden" asp-for="Id" />
+    <input type="submit" value="Delete" class="btn btn-danger" /> |
+    <a asp-action="Index">Back to List</a>
+</form>

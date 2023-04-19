@@ -12,9 +12,9 @@ namespace CarParking.Controllers
 {
     public class KhachHangsController : Controller
     {
-        private readonly CarParkingContext _context;
+        private readonly    DataContext _context;
 
-        public KhachHangsController(CarParkingContext context)
+        public KhachHangsController(DataContext context)
         {
             _context = context;
         }
@@ -148,7 +148,7 @@ namespace CarParking.Controllers
         {
             if (_context.KhachHang == null)
             {
-                return Problem("Entity set 'CarParkingContext.KhachHang'  is null.");
+                return Problem("Entity set 'DataContext.KhachHang'  is null.");
             }
             var khachHang = await _context.KhachHang.FindAsync(id);
             if (khachHang != null)

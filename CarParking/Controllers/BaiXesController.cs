@@ -12,9 +12,9 @@ namespace CarParking.Controllers
 {
     public class BaiXesController : Controller
     {
-        private readonly CarParkingContext _context;
+        private readonly DataContext _context;
 
-        public BaiXesController(CarParkingContext context)
+        public BaiXesController(DataContext context)
         {
             _context = context;
         }
@@ -148,7 +148,7 @@ namespace CarParking.Controllers
         {
             if (_context.BaiXe == null)
             {
-                return Problem("Entity set 'CarParkingContext.BaiXe'  is null.");
+                return Problem("Entity set 'DataContext.BaiXe'  is null.");
             }
             var baiXe = await _context.BaiXe.FindAsync(id);
             if (baiXe != null)

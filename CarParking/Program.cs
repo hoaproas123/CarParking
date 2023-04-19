@@ -1,13 +1,46 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using CarParking.Data;
 using CarParking.Models;
+using Microsoft.AspNetCore.Identity; 
+using Microsoft.AspNetCore.Identity.UI.Services;
+using CarParking.Areas.Admin.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<CarParkingContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("CarParkingContext") ?? throw new InvalidOperationException("Connection string 'CarParkingContext' not found.")));
+builder.Services.AddDbContext<DataContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DataContext") ?? throw new InvalidOperationException("Connection string 'DataContext' not found.")));
+
+//builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+//    .AddEntityFrameworkStores<DataContext>();
+// Add services to the container.
+//builder.Services.AddDefaultIdentity<IdentityUser>();
+builder.Services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddDefaultTokenProviders()
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<DataContext>();
+//builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+//builder.Services.AddTransient<IEmailSender>();
+builder.Services.AddScoped<IEmailSender, EmailSender>();
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    // Thiết lập về Password
+    options.Password.RequireDigit = false; // Không bắt phải có số
+    options.Password.RequireLowercase = false; // Không bắt phải có chữ thường
+    options.Password.RequireNonAlphanumeric = false; // Không bắt ký tự đặc biệt
+    options.Password.RequireUppercase = false; // Không bắt buộc chữ in
+    options.Password.RequiredLength = 3; // Số ký tự tối thiểu của password
+    options.Password.RequiredUniqueChars = 1; // Số ký tự riêng biệt
+});
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddRazorPages();
+
+
+
+
+
+
 
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
@@ -27,11 +60,22 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();
 
 app.UseAuthorization();
-
-app.MapControllerRoute(
+ 
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}"
+    );
+    endpoints.MapRazorPages();
+    endpoints.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=HomePage}/{id?}");
 
+
+
+});
 app.Run();
