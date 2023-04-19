@@ -1,7 +1,6 @@
 ﻿
 .table {
 	width: 100%;
-	border-collapse: collapse;
 }
 
 .custom-title {
@@ -10,37 +9,30 @@
 	text-align: center; 
 	text-transform: uppercase; 
 	margin-top: 50px; 
-
 }
-
 .table thead th {
 	padding: 10px;
 	text-align: left;
-	background-color: #228B22; 
-	color: #fff;
 	font-weight: bold;
 	border-bottom: none;
-	
 	font-size: 18px;
 	font-weight: bold;
-	color: #333;
-	background-color: #228B22; 
+	background-color: #228B22;
 	color: #fff;
 }
-
-
-	.table thead th:hover {
-		background-color: #228B22; 
-		color: #fff;
-	}
-
-
 .table tbody td {
 	padding: 16px;
 	border-bottom: 1px solid #dee2e6;
 }
-
-
+.table th, .table td {
+	border: 2px solid #dee2e6; /* Màu đen cho đường kẻ */
+	padding: 8px;
+	text-align: left;
+}
+.table tr:hover {
+	background-color: #CCFFCC;
+}
+/*
 .table tbody tr:nth-child(even) {
 	background-color: #f8f9fa;
 }
@@ -81,4 +73,4 @@
 	height: 100%;
 	width: 1px;
 	background-color: #dee2e6;
-}
+}*/

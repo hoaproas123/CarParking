@@ -1,12 +1,21 @@
 ﻿.table {
     width: 100%;
-    border-collapse: collapse;
 }
-    .table thead th:hover {
+    .table thead th {
+        padding: 10px;
+        text-align: left;
+        font-weight: bold;
+        border-bottom: none;
+        font-size: 18px;
+        font-weight: bold;
         background-color: #007bff;
         color: #fff;
     }
-
+    .table th, .table td {
+        border: 2px solid #dee2e6; /* Màu đen cho đường kẻ */
+        padding: 8px;
+        text-align: left;
+    }
 .custom-title {
     font-size: 50px;
     color: #ff0000;
@@ -15,61 +24,62 @@
     margin-top: 50px;
 }
 
-table thead th {
-    vertical-align: middle;
-    position: relative;
-}
+    /*table thead th {
+        vertical-align: middle;
+        position: relative;
+    }*/
 
-.table thead th:not(:last-child)::after,
-.table tbody td:not(:last-child)::after {
-    content: "";
-    display: block;
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 100%;
-    width: 1px;
-    background-color: #dee2e6;
-}
-
+/*    .table thead th:not(:last-child)::after,
+    .table tbody td:not(:last-child)::after {
+        content: "";
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 1px;
+        background-color: #dee2e6;
+    }*/
 .table tbody td {
-    padding: 16px;
-    border-bottom: 1px solid #dee2e6;
+     padding: 16px;
+     border-bottom: 1px solid #dee2e6;
 }
+.table tr:hover {
+    background-color: #CCE5FF;
+}
+/*    .table tbody tr:nth-child(even) {
+        background-color: #f8f9fa;
+    }
 
-.table tbody tr:nth-child(even) {
-    background-color: #f8f9fa;
-}
+    .table tbody tr:nth-child(odd) {
+        background-color: #fff;
+    }
 
-.table tbody tr:nth-child(odd) {
-    background-color: #fff;
-}
+    .table tbody tr:hover {
+    }
 
-.table tbody tr:hover {
-    background-color: #e9ecef;
-}
+    .table tbody td {
+        vertical-align: middle;
+    }
 
-.table tbody td {
-    vertical-align: middle;
-}
+    .table thead th {
+        vertical-align: middle;
+    }
 
-.table thead th {
-    vertical-align: middle;
-}
+    .form-group input[type="submit"] {
+        margin-top: 12px;
+        margin-right: 5px;
+    }
 
-.form-group input[type="submit"] {
-    margin-top: 12px;
-    margin-right: 5px;
-}
-
-.table thead th:not(:last-child)::after,
-.table tbody td:not(:last-child)::after {
-    content: "";
-    display: block;
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 100%;
-    width: 1px;
-    background-color: #dee2e6;
-}
+    .table thead th:not(:last-child)::after,
+    .table tbody td:not(:last-child)::after {
+        content: "";
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 1px;
+        background-color: #dee2e6;
+    }
+    */

@@ -3,32 +3,11 @@
 @{
     ViewData["Title"] = "Checked In";
 }
-
+<link rel="stylesheet" type="text/css" href="~/css/Checkin.css">
+@*==================================================================================================*@
 <h1 class="custom-title">Xe Trong Bãi</h1>
 
 
-<link rel="stylesheet" type="text/css" href="~/css/Checkin.css">
-<style>
-
-    .table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-        .table th, .table td {
-            border: 1px solid #dee2e6; /* Màu đen cho đường kẻ */
-            padding: 8px;
-            text-align: left;
-        }
-
-        .table th {
-            background-color: #f2f2f2; /* Màu nền cho tiêu đề */
-        }
-
-            .table th:last-child, .table td:last-child {
-                border-right: none;
-            }
-</style>
 <table class="table">
     <thead>
         <tr>
@@ -67,7 +46,7 @@
                     @Html.DisplayFor(modelItem => item.BaiXe_Id)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Total)
+                    @(item.Total.ToString("n0"))
                 </td>
             </tr>
         }

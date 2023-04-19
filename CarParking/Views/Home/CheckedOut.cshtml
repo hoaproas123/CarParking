@@ -3,33 +3,25 @@
 @{
     ViewData["Title"] = "Checked Out";
 }
-
-<h1 class ="custom-title">Xe Đã Ra</h1>
-
-<style>
-    /* Định dạng đường kẻ cho bảng */
-    .table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-        .table th, .table td {
-            border: 1px solid #dee2e6; /* Màu đen cho đường kẻ */
-            padding: 8px;
-            text-align: left;
-        }
-
-        .table th {
-            background-color: #f2f2f2; /* Màu nền cho tiêu đề */
-        }
-
-            .table th:last-child, .table td:last-child {
-                border-right: none; /* Không có đường kẻ phải ở cột cuối cùng */
-            }
-</style>
 <link rel="stylesheet" type="text/css" href="~/css/Checkout.css">
-<table class="table">
+@*==================================================================================================*@
+<h1 class ="custom-title">Xe Đã Ra</h1>
+@{
+    int totalDay = 0;
+    foreach (var item in Model)
+    {
+        if (item.timeOut.Value.Date == DateTime.Now.Date)
+        {
+            totalDay += item.Total;
+        }
+    }
+}
+*@<table class="table">
     <thead>
+        <tr>
+            <th style="font-size: 28px;text-align: right;"  colspan="3">Doanh thu theo ngày:</th>
+            <th style="font-size: 28px;"  colspan="2">@(totalDay.ToString("n0"))</th>
+        </tr>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.MaXe)
@@ -65,7 +57,7 @@
                 @Html.DisplayFor(modelItem => item.BaiXe_Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Total)
+                    @(item.Total.ToString("n0"))
             </td>
         </tr>
 }
