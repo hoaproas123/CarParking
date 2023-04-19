@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using CarParking.Models;
+using CarParking.Models; 
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using CarParking.Areas.Admin.Models;
 
 namespace CarParking.Data
 {
-    public class CarParkingContext : DbContext
+    //public class DataContext : IdentityDbContext
+    public class DataContext : IdentityDbContext<AppUser>
     {
-        public CarParkingContext (DbContextOptions<CarParkingContext> options)
+        public DataContext (DbContextOptions<DataContext> options)
             : base(options)
         {
         }
