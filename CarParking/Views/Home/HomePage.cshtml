@@ -3,13 +3,13 @@
 @{
 	ViewData["Title"] = "Home Page";
 }
+
 <form asp-action="HomePage">
 	<div class="white-bg">
 		<link rel="stylesheet" type="text/css" href="~/css/Home.css">
 		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 		<div class="form-group">
-			<label asp-for="MaXe" class="control-label"></label>
-			<input asp-for="MaXe" class="form-control" />
+			<input asp-for="MaXe" class="form-control" placeholder="Biển Số Xe"/>
 			<span asp-validation-for="MaXe" class="text-danger"></span>
 		</div>
 		<div class="form-group">

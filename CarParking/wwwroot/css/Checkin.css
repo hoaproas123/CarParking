@@ -1,12 +1,10 @@
 ﻿.table {
     width: 100%;
+    font-size: 24px;
 }
     .table thead th {
         padding: 10px;
-        text-align: left;
-        font-weight: bold;
         border-bottom: none;
-        font-size: 18px;
         font-weight: bold;
         background-color: #007bff;
         color: #fff;
@@ -14,7 +12,6 @@
     .table th, .table td {
         border: 2px solid #dee2e6; 
         padding: 8px;
-        text-align: left;
     }
 .custom-title {
     font-size: 50px;
