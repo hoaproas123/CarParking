@@ -43,7 +43,7 @@
                     @Html.DisplayFor(modelItem => item.BaiXe_Id)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Total)
+                    @(item.Total.ToString("n0"))
                 </td>
             </tr>
         }

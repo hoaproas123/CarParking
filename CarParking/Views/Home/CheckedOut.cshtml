@@ -5,7 +5,17 @@
 }
 
 <h1>Xe Đã Ra</h1>
-
+@{
+    int totalDay = 0;
+    foreach(var item in Model)
+    {
+        if(item.timeOut.Value.Date==DateTime.Now.Date)
+        {
+            totalDay += item.Total;
+        }
+    }
+}
+<h2>Doanh thu theo ngày: @(totalDay.ToString("n0"))</h2>
 <table class="table">
     <thead>
         <tr>
@@ -43,7 +53,7 @@
                 @Html.DisplayFor(modelItem => item.BaiXe_Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Total)
+                @(item.Total.ToString("n0"))
             </td>
         </tr>
 }

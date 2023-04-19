@@ -35,7 +35,7 @@ namespace CarParking.Controllers
         {
             int count_KH = _context.KhachHang.Where(x=>x.MaXe==khachHang.MaXe && x.timeOut==null).Count();
             BaiXe BaiXe = _context.BaiXe.Where(x => x.Id == khachHang.BaiXe_Id).FirstOrDefault();
-            if (count_KH==0)
+            if (count_KH==0&&khachHang.MaXe!=null)
             {
                 khachHang.timeIn = DateTime.Now;
                 khachHang.timeOut = null;
@@ -72,9 +72,10 @@ namespace CarParking.Controllers
         }
         public async Task<IActionResult> CheckedIn()
         {
-            var carParkingContext = _context.KhachHang.Include(k => k.BaiXe).Where(k=>k.timeOut==null).OrderByDescending(k=>k.timeIn);
-            return View(await carParkingContext.ToListAsync());
-        }
+			var carParkingContext = _context.KhachHang.Include(k => k.BaiXe).Where(k => k.timeOut == null).OrderByDescending(k => k.timeIn);
+			return View(await carParkingContext.ToListAsync());
+
+		}
         public async Task<IActionResult> CheckedOut()
         {
             var carParkingContext = _context.KhachHang.Include(k => k.BaiXe).Where(k=>k.timeOut!=null).OrderByDescending(k=>k.timeOut);
