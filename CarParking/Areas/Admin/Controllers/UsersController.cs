@@ -11,7 +11,7 @@ namespace CarParking.Areas.Admin.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly DataContext _dataContext;
+        private readonly CarParkingContext _dataContext;
         public class InputModel
         {
             public string ID { set; get; }
@@ -25,7 +25,7 @@ namespace CarParking.Areas.Admin.Controllers
         public string StatusMessage { get; set; }
 
         public List<string> AllRoles { set; get; } = new List<string>();
-        public UsersController(UserManager<AppUser> userManager, DataContext dataContext, RoleManager<IdentityRole> roleManager)
+        public UsersController(UserManager<AppUser> userManager, CarParkingContext dataContext, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _dataContext = dataContext;

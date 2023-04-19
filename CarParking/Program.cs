@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using CarParking.Areas.Admin.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<DataContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DataContext") ?? throw new InvalidOperationException("Connection string 'DataContext' not found.")));
+builder.Services.AddDbContext<CarParkingContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("CarParkingContext") ?? throw new InvalidOperationException("Connection string 'DataContext' not found.")));
 
 //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
 //    .AddEntityFrameworkStores<DataContext>();
@@ -17,7 +17,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 builder.Services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddDefaultTokenProviders()
     .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<DataContext>();
+    .AddEntityFrameworkStores<CarParkingContext>();
 //builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 //builder.Services.AddTransient<IEmailSender>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();

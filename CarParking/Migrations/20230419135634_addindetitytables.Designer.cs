@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarParking.Migrations
 {
-    [DbContext(typeof(DataContext))]
+    [DbContext(typeof(CarParkingContext))]
     [Migration("20230419135634_addindetitytables")]
     partial class addindetitytables
     {

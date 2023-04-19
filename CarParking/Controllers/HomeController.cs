@@ -10,11 +10,11 @@ namespace CarParking.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly DataContext _context;
+        private readonly CarParkingContext _context;
 		[TempData]
 		public string StatusMessage { get; set; }
 
-		public HomeController(ILogger<HomeController> logger, DataContext context)
+		public HomeController(ILogger<HomeController> logger, CarParkingContext context)
         {
             _logger = logger;
             _context = context;

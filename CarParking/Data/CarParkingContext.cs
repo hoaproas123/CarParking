@@ -10,9 +10,9 @@ using CarParking.Areas.Admin.Models;
 namespace CarParking.Data
 {
     //public class DataContext : IdentityDbContext
-    public class DataContext : IdentityDbContext<AppUser>
+    public class CarParkingContext : IdentityDbContext<AppUser>
     {
-        public DataContext (DbContextOptions<DataContext> options)
+        public CarParkingContext (DbContextOptions<CarParkingContext> options)
             : base(options)
         {
         }

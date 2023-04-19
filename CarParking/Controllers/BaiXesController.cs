@@ -12,9 +12,9 @@ namespace CarParking.Controllers
 {
     public class BaiXesController : Controller
     {
-        private readonly DataContext _context;
+        private readonly CarParkingContext _context;
 
-        public BaiXesController(DataContext context)
+        public BaiXesController(CarParkingContext context)
         {
             _context = context;
         }

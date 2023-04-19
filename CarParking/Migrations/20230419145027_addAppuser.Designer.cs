@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarParking.Migrations
 {
-    [DbContext(typeof(DataContext))]
+    [DbContext(typeof(CarParkingContext))]
     [Migration("20230419145027_addAppuser")]
     partial class addAppuser
     {

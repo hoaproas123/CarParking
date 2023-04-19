@@ -12,9 +12,9 @@ namespace CarParking.Controllers
 {
     public class AccountsController : Controller
     {
-        private readonly DataContext _context;
+        private readonly CarParkingContext _context;
 
-        public AccountsController(DataContext context)
+        public AccountsController(CarParkingContext context)
         {
             _context = context;
         }

@@ -12,9 +12,9 @@ namespace CarParking.Controllers
 {
     public class NhanViensController : Controller
     {
-        private readonly DataContext _context;
+        private readonly CarParkingContext _context;
 
-        public NhanViensController(DataContext context)
+        public NhanViensController(CarParkingContext context)
         {
             _context = context;
         }

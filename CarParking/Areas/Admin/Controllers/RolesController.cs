@@ -18,10 +18,10 @@ namespace CarParking.Areas.Admin.Controllers
             public string Name { get; set; }
         }
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly DataContext _dataContext;
+        private readonly CarParkingContext _dataContext;
         [TempData]
         public string StatusMessage { get; set; }
-        public RolesController(RoleManager<IdentityRole> roleManager, DataContext dataContext)
+        public RolesController(RoleManager<IdentityRole> roleManager, CarParkingContext dataContext)
         {
             _roleManager = roleManager;
             _dataContext = dataContext;

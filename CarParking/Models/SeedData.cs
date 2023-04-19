@@ -7,9 +7,9 @@ namespace CarParking.Models
 	{
 		public static void Initialize(IServiceProvider serviceProvider)
 		{
-			using (var context = new DataContext(
+			using (var context = new CarParkingContext(
 			serviceProvider.GetRequiredService<
-			DbContextOptions<DataContext>>()))
+			DbContextOptions<CarParkingContext>>()))
 			{
 				// Look for any movies.
 				if (context.Account.Any() || context.NhanVien.Any() || context.BaiXe.Any() || context.KhachHang.Any())

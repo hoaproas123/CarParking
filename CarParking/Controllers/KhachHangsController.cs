@@ -12,9 +12,9 @@ namespace CarParking.Controllers
 {
     public class KhachHangsController : Controller
     {
-        private readonly    DataContext _context;
+        private readonly    CarParkingContext _context;
 
-        public KhachHangsController(DataContext context)
+        public KhachHangsController(CarParkingContext context)
         {
             _context = context;
         }
