@@ -1,18 +1,6 @@
-/*
-Template Name: Admin Template
-Author: Niravjoshi / Wrappixel
-File: scss
-*/
-/*******************************/
-/*******************************/
+
 @import url("https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800");
-/*Theme Colors*/
-/*Topbar Colors*/
-/*Sidebar Colors*/
-/*Boxed layout width*/
-/*Shadow*/
-/*transitions*/
-/*Dark transparent bg*/
+
 @import url(icons/font-awesome/css/fontawesome-all.css);
 @import url(icons/themify-icons/themify-icons.css);
 @import url(icons/material-design-iconic-font/css/materialdesignicons.min.css);
@@ -27,31 +15,7 @@ File: scss
   -o-transform: rotate(45deg);
   -moz-transform: rotate(45deg); }
 
-/*******************************/
-/*******************************/
-/**
- * Table Of Content
- *
- *  1. Color system
- *  2. Options
- *  3. Body
- *  4. Typography
- *  5. Breadcrumbs
- *  6. Cards
- *  7. Dropdowns
- *  8. Buttons
- *  9. Typography
- *  10. Progress bars
- *  11. Tables
- *  12. Forms
- *  14. Component
- */
-/*!
- * Bootstrap v4.5.2 (https://getbootstrap.com/)
- * Copyright 2011-2020 The Bootstrap Authors
- * Copyright 2011-2020 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- */
+
 :root {
   --blue: #2962FF;
   --indigo: #6610f2;

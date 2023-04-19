@@ -25,52 +25,10 @@
 	border-bottom: 1px solid #dee2e6;
 }
 .table th, .table td {
-	border: 2px solid #dee2e6; /* Màu đen cho đường kẻ */
+	border: 2px solid #dee2e6; 
 	padding: 8px;
 	text-align: left;
 }
 .table tr:hover {
 	background-color: #CCFFCC;
 }
-/*
-.table tbody tr:nth-child(even) {
-	background-color: #f8f9fa;
-}
-
-
-.table tbody tr:nth-child(odd) {
-	background-color: #fff;
-}
-
-
-.table tbody tr:hover {
-	background-color: #e9ecef;
-}
-
-
-.table tbody td {
-	vertical-align: middle;
-}
-
-
-.table thead th {
-	vertical-align: middle;
-}
-
-
-.form-group input[type="submit"] {
-	margin-top: 12px;
-	margin-right: 5px;
-}
-
-.table thead th:not(:last-child)::after,
-.table tbody td:not(:last-child)::after {
-	content: "";
-	display: block;
-	position: absolute;
-	right: 0;
-	top: 0;
-	height: 100%;
-	width: 1px;
-	background-color: #dee2e6;
-}*/
