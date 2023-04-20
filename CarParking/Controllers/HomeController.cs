@@ -11,20 +11,18 @@ namespace CarParking.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly CarParkingContext _context;
-		[TempData]
-		public string StatusMessage { get; set; }
+        [TempData]
+        public string StatusMessage { get; set; }
 
-		public HomeController(ILogger<HomeController> logger, CarParkingContext context)
+        public HomeController(ILogger<HomeController> logger, CarParkingContext context)
         {
             _logger = logger;
             _context = context;
-        }
-
+        } 
         public IActionResult Index( )
-        {
-            
+        { 
             return View();
-        }
+        } 
         public IActionResult HomePage()
         {
 			ViewData["BaiXe_Id"] = new SelectList(_context.BaiXe, "Id", "Id");
