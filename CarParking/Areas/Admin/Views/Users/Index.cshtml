@@ -4,8 +4,7 @@
     ViewData["Title"] = "Danh sách nhân viên";
     @inject RoleManager<IdentityRole> _roleManager
 
-}
-<h1>Danh sách tài khoản</h1>
+} 
 
 <div class="mb-2">
     <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Register">Tạo tài khoản</a>
@@ -22,6 +21,10 @@
                 <th>
                     Vai trò
                 </th>
+
+                <th>
+                    Bãi xe đang làm việc
+                </th>
                 <th>
                     Tác vụ
                 </th>
@@ -36,6 +39,16 @@
                     </td>
                     <td>
                         @item.RoleNames
+                    </td>
+
+                    <td>
+                        @if(@item.BaiXe_Id==null)
+                        {
+                            <span>Không có</span>
+                        }else{
+                        @item.BaiXe_Id
+                        }
+                        
                     </td>
                     <td>
 

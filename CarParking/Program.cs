@@ -14,7 +14,7 @@ builder.Services.AddDbContext<CarParkingContext>(options =>
 //    .AddEntityFrameworkStores<DataContext>();
 // Add services to the container.
 //builder.Services.AddDefaultIdentity<IdentityUser>();
-builder.Services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddIdentity<AppUser, IdentityRole>( )
     .AddDefaultTokenProviders()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<CarParkingContext>();
@@ -46,7 +46,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    SeedData.Initialize(services);
+    await SeedData.InitializeAsync(services);
 }
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -73,7 +73,7 @@ app.UseEndpoints(endpoints =>
     endpoints.MapRazorPages();
     endpoints.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=HomePage}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 
 

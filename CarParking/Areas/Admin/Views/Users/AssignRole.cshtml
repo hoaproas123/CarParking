@@ -3,7 +3,7 @@
 @inject UserManager<AppUser> _userManager
 
 @{
-    ViewData["Title"] = "Role của user";
+    ViewData["Title"] = " Role của user";
 }
 @{
     //var roles = await _userManager.GetRolesAsync(Model);
@@ -15,7 +15,7 @@
     //};
     //var allrole = new SelectList(roleName);
 }
-<h2>Các role của @Model.Name</h2>
+<h3>Các role của @Model.Name</h3>
 <div class="row">
     <div class="col-md-4">
         <form method="post" asp-action="AssignRole">

@@ -1,0 +1,50 @@
+﻿@model CarParking.Models.BaiXe
+
+@{
+    ViewData["Title"] = $"Thông tin chi tiết của bãi {Model.Name}";
+}
+
+
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DiaChi)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DiaChi)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AllSlot)
+
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AllSlot)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class="col-sm-2">
+            Nhân viên tại bãi
+        </dt>
+        <dd class="col-sm-10">
+
+            <span>@TempData["listStaff"]</span>
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

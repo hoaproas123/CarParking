@@ -1,10 +1,16 @@
-﻿using CarParking.Data;
+﻿using CarParking.Areas.Admin.Models;
+using CarParking.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarParking.Models
 {
 	public static class SeedData
 	{
+        public static async Task InitializeAsync(IServiceProvider serviceProvider)
+        { 
+
+		}
 		public static void Initialize(IServiceProvider serviceProvider)
 		{
 			using (var context = new CarParkingContext(
@@ -13,66 +19,69 @@ namespace CarParking.Models
 			{
 				// Look for any movies.
 				if (context.Account.Any() || context.NhanVien.Any() || context.BaiXe.Any() || context.KhachHang.Any())
- 
-				//context.Account.AddRange(
-				//new Account
-				//{
-				//	Id = "Admin",
-				//	Password = "Admin",
-				//	Role = "Admin"
-				//},
-				//new Account
-				//{
-				//	Id = "Staff",
-				//	Password = "Staff",
-				//	Role = "Staff"
-				//}
-				//);
-				//context.SaveChanges();
-				//context.NhanVien.AddRange(
-				//new NhanVien
-				//{
-				//	Id = "205051928",
-				//	UserName = "Admin",
-				//	HoTen = "Hồ Ngọc Hòa",
-				//	dChi = "105/12 đường Dương Quãng Hàm, phường 5, quận Gò Vấp, TP.Hồ Chí Minh",
-				//	SDT = "0707622862"
-				//},
-				//new NhanVien
-				//{
-				//	Id = "205051915",
-				//	UserName = "Staff",
-				//	HoTen = "Lâm Thiên Em",
-				//	dChi = "5/5 đường Quang Trung, phường 13, quận Phú Nhuận, TP.Hồ Chí Minh",
-				//	SDT = "0676867885"
-				//},
-				//new NhanVien
-				//{
-				//	Id = "205051233",
-				//	UserName = "Staff",
-				//	HoTen = "Nguyễn Tạ Đạt",
-				//	dChi = "52/5 đường Điện Biên Phủ, phường 13, quận Bình Thạnh, TP.Hồ Chí Minh",
-				//	SDT = "0671215512"
-				//},
-				//new NhanVien
-				//{
-				//	Id = "205043423",
-				//	UserName = "Staff",
-				//	HoTen = "Lê Cao Hiếu",
-				//	dChi = "522/55 đường Nguyễn Oanh, phường 13, quận Gò Vấp, TP.Hồ Chí Minh",
-				//	SDT = "0671212424"
-				//}
-				//);
-				//context.SaveChanges();
-				//context.Database.OpenConnection();
-				//context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.BaiXe ON");
+				{
+					return;
+				}
+
+				context.Account.AddRange(
+				new Account
+				{
+					Id = "Admin",
+					Password = "Admin",
+					Role = "Admin"
+				},
+				new Account
+				{
+					Id = "Staff",
+					Password = "Staff",
+					Role = "Staff"
+				}
+				);
+				context.SaveChanges();
+				context.NhanVien.AddRange(
+				new NhanVien
+				{
+					Id = "205051928",
+					UserName = "Admin",
+					HoTen = "Hồ Ngọc Hòa",
+					dChi = "105/12 đường Dương Quãng Hàm, phường 5, quận Gò Vấp, TP.Hồ Chí Minh",
+					SDT = "0707622862"
+				},
+				new NhanVien
+				{
+					Id = "205051915",
+					UserName = "Staff",
+					HoTen = "Lâm Thiên Em",
+					dChi = "5/5 đường Quang Trung, phường 13, quận Phú Nhuận, TP.Hồ Chí Minh",
+					SDT = "0676867885"
+				},
+				new NhanVien
+				{
+					Id = "205051233",
+					UserName = "Staff",
+					HoTen = "Nguyễn Tạ Đạt",
+					dChi = "52/5 đường Điện Biên Phủ, phường 13, quận Bình Thạnh, TP.Hồ Chí Minh",
+					SDT = "0671215512"
+				},
+				new NhanVien
+				{
+					Id = "205043423",
+					UserName = "Staff",
+					HoTen = "Lê Cao Hiếu",
+					dChi = "522/55 đường Nguyễn Oanh, phường 13, quận Gò Vấp, TP.Hồ Chí Minh",
+					SDT = "0671212424"
+				}
+				);
+				context.SaveChanges();
+				context.Database.OpenConnection();
+				context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.BaiXe ON");
 				context.BaiXe.AddRange(
 					new BaiXe
 					{
 						Id = 1,
 						AllSlot = 20,
 						RemainingSlot = 20,
-						NhanVien_Id = "205051915",
+						NhanVienId = "205051915",
 						Price = 30000
 					},
 					new BaiXe
@@ -80,16 +89,8 @@ namespace CarParking.Models
 						Id = 2,
 						AllSlot = 30,
 						RemainingSlot = 30,
-						NhanVien_Id = "205051233",
+						NhanVienId = "205051233",
 						Price = 20000
-					},
-					new BaiXe
-					{
-						Id = 3,
-						AllSlot = 40,
-						RemainingSlot = 40,
-						NhanVien_Id = "205043423",
-						Price = 12000
 					}
 				);
 				context.SaveChanges();

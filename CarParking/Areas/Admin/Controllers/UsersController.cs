@@ -2,7 +2,9 @@
 using CarParking.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using static CarParking.Areas.Admin.Controllers.RolesController;
 
 namespace CarParking.Areas.Admin.Controllers
 {
@@ -11,7 +13,7 @@ namespace CarParking.Areas.Admin.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly CarParkingContext _dataContext;
+        private readonly CarParkingContext _context;
         public class InputModel
         {
             public string ID { set; get; }
@@ -28,16 +30,17 @@ namespace CarParking.Areas.Admin.Controllers
         public UsersController(UserManager<AppUser> userManager, CarParkingContext dataContext, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
-            _dataContext = dataContext;
+            _context = dataContext;
             _roleManager = roleManager;
         }
 
         public List<AppUser> users { get; set; }
         public async Task<IActionResult> Index()
         {
+            var staffUser = new AppUser { UserName = "a@a.com", Email = "staff@staff.com" };
             users = await _userManager.Users.ToListAsync();
             foreach (var u in users)
-            {
+            {   
                 var roles = await _userManager.GetRolesAsync(u);
                 u.RoleNames = string.Join(",", roles);
             }
@@ -100,6 +103,31 @@ namespace CarParking.Areas.Admin.Controllers
             user.RoleNames = "";
             user.RoleNames = string.Join(",", roles);
             return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> Edit(string? userid)
+        {
+            var user = await _userManager.FindByIdAsync(userid);
+            ViewData["BaiXe_Id"] = new SelectList(_context.BaiXe, "Id", "Id");
+
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(string Id, [Bind("BaiXe_Id")] AppUser appUser)
+        {
+            var user = await _userManager.FindByIdAsync(Id);
+            
+            user.BaiXe_Id = appUser.BaiXe_Id;
+             
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                StatusMessage = $" Cập nhật thành công";
+                return RedirectToAction(nameof(Index));
+            }
+            StatusMessage = $"Lỗi Cập nhật role thất bại";
+            return RedirectToAction(nameof(Index));
         }
     }
 }

@@ -6,23 +6,30 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using CarParking.Areas.Admin.Models;
+using CarParking.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace CarParking.Areas.Identity.Pages.Account.Manage
 {
     public class IndexModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
+        private readonly CarParkingContext _context;
 
         public IndexModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            UserManager<AppUser> userManager,
+            SignInManager<AppUser> signInManager,
+            CarParkingContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
         }
 
         /// <summary>
@@ -38,6 +45,7 @@ namespace CarParking.Areas.Identity.Pages.Account.Manage
         [TempData]
         public string StatusMessage { get; set; }
 
+        public SelectList ListBaiXe { get; set; }
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
@@ -58,9 +66,12 @@ namespace CarParking.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
-        }
 
-        private async Task LoadAsync(IdentityUser user)
+            public int BaiXe_Id { get; set; }
+        } 
+        
+
+        private async Task LoadAsync(AppUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
@@ -75,6 +86,8 @@ namespace CarParking.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnGetAsync()
         {
+
+            ListBaiXe = new SelectList(_context.BaiXe, "Id", "Id");
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
@@ -109,8 +122,11 @@ namespace CarParking.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
+            user.BaiXe_Id = Input.BaiXe_Id; 
 
+            await _userManager.UpdateAsync(user);
             await _signInManager.RefreshSignInAsync(user);
+
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();
         }

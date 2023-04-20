@@ -1,0 +1,18 @@
+﻿@model CarParking.Models.BaiXe
+
+@{
+    ViewData["Title"] = "Xóa bãi xe";
+}
+
+<h1>Delete</h1>
+
+<h3>Bạn có chắc chắn là muốn xóa bãi @Model.Name không?</h3>
+<div>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

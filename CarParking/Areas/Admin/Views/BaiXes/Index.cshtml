@@ -1,0 +1,74 @@
+﻿@model IEnumerable<CarParking.Areas.Admin.Controllers.BaiXesController.Temporary>
+
+
+@{
+    ViewData["Title"] = "Danh sách bãi xe";
+}
+
+<partial name="_StatusMessage" model=@TempData["StatusMessage"]></partial>
+<div class="mb-2">
+    <a class="btn btn-secondary" asp-action="Create">Thêm bãi mới</a>
+</div>
+<table class="table">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.bx.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.bx.DiaChi)
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.bx.AllSlot)
+
+                </th>
+                <th>
+                    Đã checkout
+
+                </th>
+                <th>
+                    Danh thu hôm nay
+
+                </th>
+
+                <th>
+                    Tác vụ
+
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.bx.Name)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.bx.DiaChi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.quantitynow) / @Html.DisplayFor(modelItem => item.bx.AllSlot)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.quantitycheckout)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.total)
+                    </td>
+                    <td>
+
+                        <a class="btn btn-primary btn-sm" asp-area="Admin" asp-controller="BaiXes" asp-action="Edit" asp-route-id="@item.bx.Id">Edit</a>
+                        <a class="btn btn-primary btn-sm" asp-area="Admin" asp-controller="BaiXes" asp-action="Detail" asp-route-id="@item.bx.Id">Detail</a>
+                        <a class="btn btn-danger btn-sm" asp-area="Admin" asp-controller="BaiXes" asp-action="Delete" asp-route-id="@item.bx.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</table>

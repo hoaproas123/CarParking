@@ -6,13 +6,14 @@ using Microsoft.EntityFrameworkCore;
 using CarParking.Models; 
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using CarParking.Areas.Admin.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace CarParking.Data
 {
     //public class DataContext : IdentityDbContext
     public class CarParkingContext : IdentityDbContext<AppUser>
     {
-        public CarParkingContext (DbContextOptions<CarParkingContext> options)
+        public CarParkingContext(DbContextOptions<CarParkingContext> options)
             : base(options)
         {
         }
@@ -24,6 +25,9 @@ namespace CarParking.Data
         public DbSet<CarParking.Models.KhachHang>? KhachHang { get; set; }
 
         public DbSet<CarParking.Models.NhanVien>? NhanVien { get; set; }
-
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder); 
+        }
     }
 }
