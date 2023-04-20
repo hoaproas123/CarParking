@@ -4,6 +4,7 @@ using CarParking.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarParking.Migrations
 {
     [DbContext(typeof(CarParkingContext))]
-    partial class CarParkingContextModelSnapshot : ModelSnapshot
+    [Migration("20230419201859_nullableRoleName")]
+    partial class nullableRoleName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,7 +107,7 @@ namespace CarParking.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Account", (string)null);
+                    b.ToTable("Account");
                 });
 
             modelBuilder.Entity("CarParking.Models.BaiXe", b =>
@@ -133,7 +135,7 @@ namespace CarParking.Migrations
 
                     b.HasIndex("NhanVien_Id");
 
-                    b.ToTable("BaiXe", (string)null);
+                    b.ToTable("BaiXe");
                 });
 
             modelBuilder.Entity("CarParking.Models.KhachHang", b =>
@@ -164,7 +166,7 @@ namespace CarParking.Migrations
 
                     b.HasIndex("BaiXe_Id");
 
-                    b.ToTable("KhachHang", (string)null);
+                    b.ToTable("KhachHang");
                 });
 
             modelBuilder.Entity("CarParking.Models.NhanVien", b =>
@@ -191,7 +193,7 @@ namespace CarParking.Migrations
 
                     b.HasIndex("UserName");
 
-                    b.ToTable("NhanVien", (string)null);
+                    b.ToTable("NhanVien");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
